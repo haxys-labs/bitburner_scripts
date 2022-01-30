@@ -27,5 +27,5 @@ export async function main(ns) {
     }
     // Hack the planet!
     await ns.nuke(target);
-    ns.toast("☢ " + target + " nuked!");
+    ns.toast("🔥 " + target + " nuked! 🔥");
 }
