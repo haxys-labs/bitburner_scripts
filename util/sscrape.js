@@ -1,11 +1,11 @@
 import { scrape_hosts } from "/lib/meta";
 
-/* Scraper v0.0.1 by haxys
+/* Server Scraper v0.0.1 by haxys
  * Extract all useful information from all hosts
  * in order to prevent excessive script memory
  */
 
-/** @param {import(".").NS } ns */
+/** @param {import("..").NS } ns */
 export async function main(ns) {
     await save_scraped_hosts(ns, scrape_hosts(ns));
 }
