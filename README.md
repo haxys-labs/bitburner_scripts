@@ -8,6 +8,15 @@ For license information, read the LICENSE file.
 
 The `run.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `run.js` by itself and trust it to download and execute whatever else it needs to function.
 
+To execute `run.js`, simply run the following one-liner in the terminal:
+
+```
+wget https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/run.js run.js
+./run.js
+```
+
+This will download and execute the ClusterFlock suite, then clean up after itself.
+
 ## Packages
 
 The `deploy.js` script is capable of deploying script packages to other hosts. The following packages have been created:
@@ -53,5 +62,6 @@ The files in the `lib` directory provide useful functions for other scripts.
 
 ## Utilities
 
+* `util/rm.js` - A script encapsulation of the `ns.rm()` function.
 * `util/sscrape.js` - Used to scrape static data for all servers in the game.
 * `util/writeport.js` - Used for testing `clusterflock`.
