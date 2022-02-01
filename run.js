@@ -1,6 +1,6 @@
 /* run.js by haxys
- * Trigger the launch of the bitburner automation suite.
- * The goal is to automate everything in bitburner from ground zero.
+ * 4.6GB
+ * Install and launch the ClusterFlock automation suite.
  */
 
 const SPLASH = "\
@@ -9,30 +9,47 @@ const SPLASH = "\
 | '__| | | | '_ \\   | / __|\n\
 | |  | |_| | | | |_ | \\__ \\\n\
 |_|   \\__,_|_| |_(_)/ |___/\n\
- v0.0.1 by haxys  |__/\
+ v0.0.3 by haxys  |__/\
 ";
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
-    async function grab(filename) {
-        const base_url = "https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main";
-        await ns.wget(base_url + filename, filename, "home");
+    async function download(filename) {
+        // The files will be retrieved from the live GitHub page.
+        const base_url = "https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/";
+        await ns.wget(
+            base_url + filename,
+            (filename.includes("/")? "/" + filename : filename),
+            "home"
+        );
     }
-    // The files are hosted on GitHub.
 
-    ns.tprintf(SPLASH);
-    
-    // Retrieve the latest manifest file.
-    await grab("MANIFEST.txt");
-    let manifest = ns.read("MANIFEST.txt").split("\n");
+    async function get_manifest() {
+        // Retrieve, read, clean, return.
+        await download("MANIFEST.txt");
+        let manifest = ns.read("MANIFEST.txt").split("\n");
+        return manifest;
+    }
 
-    // Retrieve all other necessary files.
-    for (filename of manifest) {
-        if (filename[0] != "#") {
-            await grab(filename);
+    async function install_clusterflock() {
+        for (const filename of await get_manifest()) {
+            if (filename[0] != "#") { // The manifest can contain comments.
+                await download(filename);
+            }
         }
     }
 
-    // Remove manifest file.
-    ns.rm("MANIFEST.txt", "home");
+    function del(filename) {
+        ns.run("/util/rm.js", 1, filename);
+    }
+
+    ns.tprintf(SPLASH);
+    ns.tprintf("Installing ClusterFlock...");
+    await install_clusterflock();
+    ns.tprintf("Cleaning up files...");
+    del("MANIFEST.txt"); // 2.6GB
+    await ns.asleep(100);
+    // Execute ClusterFlock.
+    ns.run("clusterflock.js"); // 2.6GB
+    ns.spawn("autoscan.js"); // 2.2GB
 }
