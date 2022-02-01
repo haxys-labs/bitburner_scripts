@@ -1,5 +1,5 @@
 /* run.js by haxys
- * 4.6GB
+ * 2.6GB
  * Install and launch the ClusterFlock automation suite.
  */
 
@@ -47,9 +47,11 @@ export async function main(ns) {
     ns.tprintf("Installing ClusterFlock...");
     await install_clusterflock();
     ns.tprintf("Cleaning up files...");
-    del("MANIFEST.txt"); // 2.6GB
-    await ns.asleep(100);
-    // Execute ClusterFlock.
+    del("MANIFEST.txt");       // 2.6GB
+    await ns.asleep(200);
+    ns.tprintf("Launching ClusterFlock...");
     ns.run("clusterflock.js"); // 2.6GB
-    ns.spawn("autoscan.js"); // 2.2GB
+    await ns.asleep(800);
+    ns.run("autoscan.js");     // 2.2GB
+    ns.tprintf("Installation complete!");
 }

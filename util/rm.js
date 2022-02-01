@@ -4,9 +4,15 @@
 
 /** @param {NS} ns **/
 export async function main(ns) {
-	try {
-		ns.rm(ns.args[0]);
-	} catch (error){
-		ns.tprintf("Error: %s", error);
+	if (ns.args.length == 0) {
+		ns.tprintf("Usage: rm.js [filename] [hostname]");
+	} else {
+		const filename = ns.args[0];
+		if (ns.args.length > 1) {
+			const hostname = ns.args[1];
+			ns.rm(filename, hostname);
+		} else {
+			ns.rm(filename);
+		}
 	}
 }

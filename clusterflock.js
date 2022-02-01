@@ -21,12 +21,19 @@ export async function main(ns) {
         }
     }
 
+    function del(filename, hostname) {
+        ns.run("/util/rm.js", 1, filename, hostname);
+    }
+
     ns.tprintf(SPLASH);
     while(true){
         const task = await get_task();
         switch (task.type) {
             case "TEST":
                 ns.tprintf("Test message: %s", task.message);
+                continue;
+            case "DELETE":
+                del(task.filename, task.hostname);
                 continue;
             case "NUKABLE":
                 for (const target of task.hosts) {

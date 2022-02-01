@@ -23,6 +23,18 @@ export async function main(ns) {
         send_hosts_to_c2("NUKABLE", get_nukable_hosts(ns));
     }
 
+    // Give run.js time to die.
+    await ns.asleep(500);
+    if(ns.fileExists("run.js","home")) {
+        const message = {
+            type: "DELETE",
+            filename: "run.js",
+            hostname: "home"
+        }
+        let json_msg = JSON.stringify(message);
+        await ns.writePort(1, json_msg);
+    }
+    // Execute main loop.
     while(true) {
         await launch_nukes();
         await ns.asleep(1000);
