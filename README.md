@@ -8,7 +8,7 @@ For license information, read the LICENSE file.
 
 The `run.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `run.js` by itself and trust it to download and execute whatever else it needs to function.
 
-To execute `run.js`, simply run the following one-liner in the terminal:
+To execute `run.js`, simply run the following commands in the terminal:
 
 ```
 wget https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/run.js run.js
