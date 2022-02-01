@@ -10,10 +10,10 @@ The `deploy.js` script is capable of deploying script packages to other hosts. T
 
 * `clusterflock` - A utility for managing a distributed automation suite.
     * Works with `autoscan` to automatically nuke available hosts.
-    * Requires `ice/nuke.js`, `lib/meta.js` and `lib/scan.js`.
+    * Requires `ice/nuke.js` and `lib/meta.js`.
 * `autoscan` - A utility for scanning networks for actionable hosts.
     * Detects nukable hosts, reporting them to `clusterflock`.
-    * Requires `lib/meta.js` and `lib/scan.js`.
+    * Requires `lib/meta.js`.
 
 These packages are intended to be run as daemons.
 
@@ -23,7 +23,7 @@ Besides the more complex deployable packages, this repository also includes usef
 
 * `deploy.js` - Deploys and executes packages and scripts on remote hosts.
 * `netscan.js` - Reveals owned, hackable, and nukable hosts.
-    * Requires `lib/meta.js` and `lib/scan.js`.
+    * Requires `lib/meta.js`.
 
 ## Ice
 
@@ -32,7 +32,7 @@ Besides the more complex deployable packages, this repository also includes usef
 * `ice/hack.js` - Hack the target to steal money.
 * `ice/grow.js` - Grow the target's money.
 * `ice/nuke.js` - Run `NUKE.exe` on the target.
-    * Requires `lib/meta.js` and `lib/scan.js`.
+    * Requires `lib/meta.js`.
 * `ice/weak.js` - Weaken the target.
 
 ## Libraries
@@ -40,13 +40,12 @@ Besides the more complex deployable packages, this repository also includes usef
 The files in the `lib` directory provide useful functions for other scripts.
 
 * `lib/meta.js` - Functions for gathering general info.
+    * `get_hosts(ns)` - Get a list of all hosts in the game.
     * `get_hackable_hosts(ns)` - Get a list of hosts that can be hacked for money.
     * `get_nukable_hosts(ns)` - Get a list of hosts which are ready to be nuked for root.
     * `get_owned_hosts(ns)` - Get a list of hosts allowing code execution.
     * `get_tools_owned(ns)` - Get a list of all port-opening tools currently owned.
     * `scrape_hosts(ns)` - Retrieve all static data about all hosts in the network.
-* `lib/scan.js` - Functions for finding targets.
-    * `get_hosts(ns)` - Get a list of all hosts in the game.
 
 ## Utilities
 

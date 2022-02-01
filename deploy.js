@@ -1,20 +1,18 @@
 /** @param {NS} ns **/
 
-// deploy.js v0.0.3 by haxys
+// deploy.js v0.0.4 by haxys
 
 const PACKAGES = {
     /* Define all files necessary
      * for each package to run.
      */
 	autoscan: [
-		"/lib/scan.js",
 		"/lib/meta.js",
 		"autoscan.js"
 	],
 	clusterflock: [
-		"/ice/nuke.js",
         "/lib/meta.js",
-        "/lib/scan.js",
+		"/ice/nuke.js",
 		"clusterflock.js"
 	]
 };
