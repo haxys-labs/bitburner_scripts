@@ -1,4 +1,4 @@
-import { get_owned_hosts, get_hackable_hosts, get_nukable_hosts } from "/lib/scan";
+import { get_owned_hosts, get_hackable_hosts, get_nukable_hosts } from "/lib/meta";
 
 const SPLASH = "\
      __     _   __                 \n\
@@ -6,7 +6,7 @@ const SPLASH = "\
  /  \\/ / _ \\ __\\ \\ / __/ _` | '_ \\ \n\
 / /\\  /  __/ |__\\ \\ (_| (_| | | | |\n\
 \\_\\ \\/ \\___|\\__\\__/\\___\\__,_|_| |_|\n\
-  by haxys                 v0.1.1\
+  by haxys                 v0.1.2\
 ";
 
 /** @param {import(".").NS } ns */

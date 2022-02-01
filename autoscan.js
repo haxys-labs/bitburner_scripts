@@ -1,6 +1,6 @@
-import { get_nukable_hosts } from "/lib/scan";
+import { get_nukable_hosts } from "/lib/meta";
 
-/* AutoScan v0.1.1
+/* AutoScan v0.1.2
  * by haxys
  * 
  * Nuke hosts that haven't been nuked.
