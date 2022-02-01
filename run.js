@@ -23,13 +23,13 @@ export async function main(ns) {
     ns.tprintf(SPLASH);
     
     // Retrieve the latest manifest file.
-    grab("/MANIFEST.txt");
+    await grab("MANIFEST.txt");
     let manifest = ns.read("MANIFEST.txt").split("\n");
 
     // Retrieve all other necessary files.
     for (filename of manifest) {
         if (filename[0] != "#") {
-            grab(filename);
+            await grab(filename);
         }
     }
 

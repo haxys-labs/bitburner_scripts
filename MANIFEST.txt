@@ -1,6 +1,6 @@
 # Manifest for `run.js`.
-/autoscan.js
-/clusterflock.js
-/lib/meta.js
-/ice/nuke.js
-/util/sscrape.js
+autoscan.js
+clusterflock.js
+lib/meta.js
+ice/nuke.js
+util/sscrape.js
