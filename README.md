@@ -4,6 +4,10 @@ This repo collects the scripts I've written for [BitBurner](https://danielyxie.g
 
 For license information, read the LICENSE file.
 
+## Full-Auto
+
+The `run.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `run.js` by itself and trust it to download and execute whatever else it needs to function.
+
 ## Packages
 
 The `deploy.js` script is capable of deploying script packages to other hosts. The following packages have been created:
