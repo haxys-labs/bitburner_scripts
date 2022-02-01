@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 
-// deploy.js v0.0.2 by haxys
+// deploy.js v0.0.3 by haxys
 
 const PACKAGES = {
     /* Define all files necessary
@@ -13,6 +13,8 @@ const PACKAGES = {
 	],
 	clusterflock: [
 		"/ice/nuke.js",
+        "/lib/meta.js",
+        "/lib/scan.js",
 		"clusterflock.js"
 	]
 };
