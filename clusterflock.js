@@ -3,11 +3,19 @@ const SPLASH = "\
  / __| |_  _ __| |_ ___ _ _| __| |___  __| |__\n\
 | (__| | || (_-<  _/ -_) '_| _|| / _ \\/ _| / /\n\
  \\___|_|\\_,_/__/\\__\\___|_| |_| |_\\___/\\__|_\\_\\\n\
-  by haxys                            v0.1.1\
+  by haxys                            v0.2.0\
 ";
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
+    ns.tprintf(SPLASH);
+    while(true){
+        await process_tasks();
+    }
+
+    function del(filename, hostname) {
+        ns.run("/util/rm.js", 1, filename, hostname);
+    }
 
     async function get_task() {
         // Await a new assignment.
@@ -21,12 +29,7 @@ export async function main(ns) {
         }
     }
 
-    function del(filename, hostname) {
-        ns.run("/util/rm.js", 1, filename, hostname);
-    }
-
-    ns.tprintf(SPLASH);
-    while(true){
+    async function process_tasks() {
         const task = await get_task();
         switch (task.type) {
             case "TEST":

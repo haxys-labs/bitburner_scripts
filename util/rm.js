@@ -1,4 +1,4 @@
-/* rm.js v0.0.1 by haxys
+/* rm.js v0.1.0 by haxys
  * Remove a file.
  */
 
