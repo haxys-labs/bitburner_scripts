@@ -1,6 +1,6 @@
 import { get_hackable_hosts, get_nukable_hosts } from "/lib/meta";
 
-/* AutoScan v0.2.3 by haxys
+/* AutoScan v0.2.4 by haxys
  * Automate BitBurner activities.
  */
 
@@ -8,12 +8,14 @@ const SLEEP_DELAY = 1.0; // Seconds between empty queue checks.
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
+    const hackable_hostfile = "/data/hackable_hosts.txt";
+
     await let_run_script_die();
     await event_loop();
 
     async function empty_queue() {
         while(ns.peek(1) != "NULL PORT DATA") {
-            await ns.asleep(SLEEP_DELAY * 1000);
+            await take_a_nap();
         }
     }
 
@@ -22,12 +24,17 @@ export async function main(ns) {
             await empty_queue();
             await launch_nukes();
             await hack_the_planet();
+            await take_a_nap();
         }
     }
 
     async function hack_the_planet() {
         // Attack all possible targets.
-        await process_hosts("HACKABLE", get_hackable_hosts(ns));
+        let known_hosts = read_list(hackable_hostfile);
+        let hackable_hosts = get_hackable_hosts(ns).filter(
+            x => !known_hosts.includes(x)
+        );
+        await process_hosts("HACKABLE", hackable_hosts);
     }
 
     async function launch_nukes() {
@@ -53,6 +60,19 @@ export async function main(ns) {
         }
     }
 
+    function read_list(filename) {
+        try {
+            let contents = ns.read(filename);
+            let items = contents.split("\n").filter(
+                x => x.length > 0
+            );
+            return items;
+        } catch (error) {
+            ns.tprint("Error reading file: ", filename);
+            return [];
+        }
+    }
+
     async function send_hosts_to_c2(msg_type, target_hosts) {
         const message = {
             type: msg_type,
@@ -64,5 +84,9 @@ export async function main(ns) {
     async function send_message_to_c2(message) {
         let json_msg = JSON.stringify(message);
         await ns.writePort(1, json_msg);
+    }
+
+    async function take_a_nap() {
+        await ns.asleep(SLEEP_DELAY * 1000);
     }
 }
