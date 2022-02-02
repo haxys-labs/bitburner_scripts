@@ -1,30 +1,38 @@
 import { get_hackable_hosts, get_nukable_hosts } from "/lib/meta";
 
-/* AutoScan v0.2.2 by haxys
+/* AutoScan v0.2.3 by haxys
  * Automate BitBurner activities.
  */
+
+const SLEEP_DELAY = 1.0; // Seconds between empty queue checks.
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
     await let_run_script_die();
     await event_loop();
 
+    async function empty_queue() {
+        while(ns.peek(1) != "NULL PORT DATA") {
+            await ns.asleep(SLEEP_DELAY * 1000);
+        }
+    }
+
     async function event_loop() {
         while (true) {
+            await empty_queue();
             await launch_nukes();
             await hack_the_planet();
-            await ns.asleep(1000);
         }
     }
 
     async function hack_the_planet() {
         // Attack all possible targets.
-        process_hosts("HACKABLE", get_hackable_hosts(ns));
+        await process_hosts("HACKABLE", get_hackable_hosts(ns));
     }
 
     async function launch_nukes() {
         // Nuke all possible targets.
-        process_hosts("NUKABLE", get_nukable_hosts(ns));
+        await process_hosts("NUKABLE", get_nukable_hosts(ns));
     }
 
     async function let_run_script_die() {
@@ -41,7 +49,7 @@ export async function main(ns) {
 
     async function process_hosts(message, hosts) {
         if (hosts.length > 0) {
-            send_hosts_to_c2(message, hosts);
+            await send_hosts_to_c2(message, hosts);
         }
     }
 

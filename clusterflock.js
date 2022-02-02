@@ -3,8 +3,10 @@ const SPLASH = "\
  / __| |_  _ __| |_ ___ _ _| __| |___  __| |__\n\
 | (__| | || (_-<  _/ -_) '_| _|| / _ \\/ _| / /\n\
  \\___|_|\\_,_/__/\\__\\___|_| |_| |_\\___/\\__|_\\_\\\n\
-  by haxys                            v0.2.2\
+  by haxys                            v0.2.3\
 ";
+
+const SLEEP_DELAY = 1.0; // Seconds between peek checks.
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
@@ -13,18 +15,23 @@ export async function main(ns) {
         await process_tasks();
     }
 
-    async function get_task() {
+    async function peek_task() {
         // Await a new assignment.
-        let new_task = ns.readPort(1);
+        let new_task = ns.peek(1);
         while (new_task == "NULL PORT DATA") {
-            await ns.asleep(1000);
-            new_task = ns.readPort(1);
+            await ns.asleep(SLEEP_DELAY * 1000);
+            new_task = ns.peek(1);
         }
         return JSON.parse(new_task);
     }
 
+    function pop_task() {
+        // Clear the completed task from the queue.
+        ns.readPort(1);
+    }
+
     async function process_tasks() {
-        const task = await get_task();
+        const task = await peek_task();
         switch (task.type) {
             case "DELETE":
                 ns.run("/util/rm.js", 1, task.filename, task.hostname);
@@ -43,5 +50,6 @@ export async function main(ns) {
             default:
                 ns.tprintf("Unknown task: %s", JSON.stringify(task));
         }
+        pop_task();
     }
 }
