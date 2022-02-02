@@ -1,5 +1,3 @@
-/** @param {NS} ns **/
-
 // deploy.js v0.0.4 by haxys
 
 const PACKAGES = {
@@ -25,6 +23,7 @@ const USAGE = (
     + "\n \nNote: Requires root access to host."
 );
 
+/** @param {import(".").NS } ns */
 export async function main(ns) {
 	if (ns.args.length == 2) {
         if (Object.keys(PACKAGES).includes(ns.args[0])) {
