@@ -25,7 +25,7 @@ The `deploy.js` script is capable of deploying script packages to other hosts. T
     * Works with `autoscan` to automatically nuke available hosts.
     * Requires `ice/nuke.js` and `lib/meta.js`.
 * `autoscan` - A utility for scanning networks for actionable hosts.
-    * Detects nukable hosts, reporting them to `clusterflock`.
+    * Scans hosts and reports changes to `clusterflock`.
     * Requires `lib/meta.js`.
 
 These packages are intended to be run as daemons.
