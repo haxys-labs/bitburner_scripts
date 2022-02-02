@@ -1,15 +1,19 @@
 import { get_nukable_hosts } from "/lib/meta";
 
-/* AutoScan v0.2.0 by haxys
+/* AutoScan v0.2.1 by haxys
  * Automate BitBurner activities.
  */
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
     await let_run_script_die();
-    while(true) {
-        await launch_nukes();
-        await ns.asleep(1000);
+    await event_loop();
+
+    async function event_loop() {
+        while (true) {
+            await launch_nukes();
+            await ns.asleep(1000);
+        }
     }
 
     async function launch_nukes() {
@@ -25,8 +29,7 @@ export async function main(ns) {
                 filename: "run.js",
                 hostname: "home"
             };
-            let json_msg = JSON.stringify(message);
-            await ns.writePort(1, json_msg);
+            await send_message_to_c2(message);
         }
     }
 
@@ -35,6 +38,10 @@ export async function main(ns) {
             type: msg_type,
             hosts: target_hosts
         };
+        await send_message_to_c2(message);
+    }
+
+    async function send_message_to_c2(message) {
         let json_msg = JSON.stringify(message);
         await ns.writePort(1, json_msg);
     }
