@@ -1,14 +1,12 @@
 /* run.js by haxys
  * Install and launch the ClusterFlock automation suite.
  */
-
 const SPLASH = "\
-                     _\n\
- _ __ _   _ _ __    (_)___\n\
-| '__| | | | '_ \\   | / __|\n\
-| |  | |_| | | | |_ | \\__ \\\n\
-|_|   \\__,_|_| |_(_)/ |___/\n\
- v0.1.1 by haxys  |__/\
+  ___ _         _           ___ _         _   \n\
+ / __| |_  _ __| |_ ___ _ _| __| |___  __| |__\n\
+| (__| | || (_-<  _/ -_) '_| _|| / _ \\/ _| / /\n\
+ \\___|_|\\_,_/__/\\__\\___|_| |_| |_\\___/\\__|_\\_\\\n\
+  INSTALLER  v0.1.1                 by haxys\
 ";
 const BASE_URL = "https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/";
 

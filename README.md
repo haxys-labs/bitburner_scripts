@@ -6,13 +6,13 @@ For license information, read the LICENSE file.
 
 ## Full-Auto
 
-The `run.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `run.js` by itself and trust it to download and execute whatever else it needs to function.
+The `install.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `install.js` by itself and trust it to download and execute whatever else it needs to function.
 
-To execute `run.js`, simply run the following commands in the terminal:
+To execute `install.js`, simply run the following commands in the terminal:
 
 ```
-wget https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/run.js run.js
-./run.js
+wget https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/install.js install.js
+./install.js
 ```
 
 This will download and execute the ClusterFlock suite, then clean up after itself.
