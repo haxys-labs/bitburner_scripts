@@ -29,6 +29,9 @@ export async function main(ns) {
             case "DELETE":
                 ns.run("/util/rm.js", 1, task.filename, task.hostname);
                 break;
+            case "HACKABLE":
+                ns.tprint("Hackable - ", task.hosts);
+                break;
             case "NUKABLE":
                 for (const target of task.hosts) {
                     ns.run("/ice/nuke.js", 1, target);

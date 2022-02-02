@@ -1,6 +1,6 @@
-import { get_nukable_hosts } from "/lib/meta";
+import { get_hackable_hosts, get_nukable_hosts } from "/lib/meta";
 
-/* AutoScan v0.2.1 by haxys
+/* AutoScan v0.2.2 by haxys
  * Automate BitBurner activities.
  */
 
@@ -12,13 +12,19 @@ export async function main(ns) {
     async function event_loop() {
         while (true) {
             await launch_nukes();
+            await hack_the_planet();
             await ns.asleep(1000);
         }
     }
 
+    async function hack_the_planet() {
+        // Attack all possible targets.
+        process_hosts("HACKABLE", get_hackable_hosts(ns));
+    }
+
     async function launch_nukes() {
         // Nuke all possible targets.
-        send_hosts_to_c2("NUKABLE", get_nukable_hosts(ns));
+        process_hosts("NUKABLE", get_nukable_hosts(ns));
     }
 
     async function let_run_script_die() {
@@ -30,6 +36,12 @@ export async function main(ns) {
                 hostname: "home"
             };
             await send_message_to_c2(message);
+        }
+    }
+
+    async function process_hosts(message, hosts) {
+        if (hosts.length > 0) {
+            send_hosts_to_c2(message, hosts);
         }
     }
 
