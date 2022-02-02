@@ -4,4 +4,3 @@ clusterflock.js
 lib/meta.js
 ice/nuke.js
 util/rm.js
-util/sscrape.js
