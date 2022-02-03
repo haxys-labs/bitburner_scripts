@@ -4,29 +4,25 @@ This repo collects the scripts I've written for [BitBurner](https://danielyxie.g
 
 For license information, read the LICENSE file.
 
-## Full-Auto
+## Beginner Template
 
-The `install.js` script is designed to automate as much as possible from ground zero. The goal is to be able to download and execute `install.js` by itself and trust it to download and execute whatever else it needs to function.
+The `starting_template/template.js` file is a starting JavaScript file for getting started with BitBurner scripting.
 
-To execute `install.js`, simply run the following commands in the terminal:
+## ClusterFlock
+
+The `ClusterFlock` suite is designed to automate as much as possible from ground zero. To launch, download and execute `install.js`, which will take care of the rest:
 
 ```
 wget https://raw.githubusercontent.com/haxys-labs/bitburner_scripts/main/install.js install.js
 ./install.js
 ```
 
-This will download and execute the ClusterFlock suite, then clean up after itself.
-
 ## Packages
 
 The `deploy.js` script is capable of deploying script packages to other hosts. The following packages have been created:
 
-* `clusterflock` - A utility for managing a distributed automation suite.
-    * Works with `autoscan` to automatically nuke available hosts.
+* `clusterflock` - A utility for automating the BitBurner game.
     * Requires `ice/nuke.js` and `lib/meta.js`.
-* `autoscan` - A utility for scanning networks for actionable hosts.
-    * Scans hosts and reports changes to `clusterflock`.
-    * Requires `lib/meta.js`.
 
 These packages are intended to be run as daemons.
 
@@ -42,6 +38,7 @@ Besides the more complex deployable packages, this repository also includes usef
 
 "Ice" are tools which execute a specific action on a specific host.
 
+* `ice/exec.js` - Execute a script on a target host.
 * `ice/hack.js` - Hack the target to steal money.
 * `ice/grow.js` - Grow the target's money.
 * `ice/nuke.js` - Run `NUKE.exe` on the target.
@@ -63,5 +60,6 @@ The files in the `lib` directory provide useful functions for other scripts.
 ## Utilities
 
 * `util/rm.js` - A script encapsulation of the `ns.rm()` function.
+* `util/send.js` - Send files to a target host.
 * `util/sscrape.js` - Used to scrape static data for all servers in the game.
 * `util/writeport.js` - Used for testing `clusterflock`.

@@ -1,5 +1,4 @@
-# Manifest for `run.js`.
-autoscan.js
+# Manifest for `install.js`.
 clusterflock.js
 lib/meta.js
 ice/nuke.js
