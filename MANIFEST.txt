@@ -1,5 +1,0 @@
-# Manifest for `install.js`.
-clusterflock.js
-lib/meta.js
-ice/nuke.js
-util/rm.js
